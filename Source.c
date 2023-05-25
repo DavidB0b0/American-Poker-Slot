@@ -8,7 +8,7 @@
 #define NUM_SUITS 4
 
 enum Rank {
-    Ace, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King
+    Ace = 1, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King
 };
 
 enum Suit {
@@ -20,18 +20,27 @@ typedef struct {
     enum Suit suit;
 } Card;
 
-void drawHand(Card hand[]) {
+void initializeDeck(Card deck[]) {
     int i, j, index = 0;
-    for (i = 0; i < 5; i++) {
-        for (j = 0; j < 5; j++) {
-            hand[index].rank = rand() % (12 - 1+1) ;
-            hand[index].suit = rand() % (3 - 0+1) ;
+    for (i = 0; i < NUM_RANKS; i++) {
+        for (j = 0; j < NUM_SUITS; j++) {
+            deck[index].rank = i + 1;
+            deck[index].suit = j;
             index++;
         }
     }
 }
 
-
+void shuffleDeck(Card deck[]) {
+    int i, j;
+    Card temp;
+    for (i = 0; i < NUM_RANKS * NUM_SUITS; i++) {
+        j = rand() % (NUM_RANKS * NUM_SUITS);
+        temp = deck[i];
+        deck[i] = deck[j];
+        deck[j] = temp;
+    }
+}
 
 void printCard(Card card) {
     switch (card.rank) {
@@ -78,16 +87,16 @@ void printCard(Card card) {
 
     switch (card.suit) {
     case Clubs:
-        printf(" C");
+        printf("C");
         break;
     case Diamonds:
-        printf(" D");
+        printf("D");
         break;
     case Hearts:
-        printf(" H");
+        printf("H");
         break;
     case Spades:
-        printf(" S");
+        printf("S");
         break;
     }
 }
@@ -100,6 +109,12 @@ void printHand(Card hand[]) {
     }
 }
 
+void drawCards(Card deck[], Card hand[]) {
+    int i;
+    for (i = 0; i < HAND_SIZE; i++) {
+        hand[i] = deck[i];
+    }
+}
 
 
 
@@ -168,8 +183,8 @@ int isStraight(Card hand[]) {
         }
     }
 
-    // Special case: Ace, 2, 3, 4, 5
-    if (ranks[0] && ranks[1] && ranks[2] && ranks[3] && ranks[12]) {
+    // Special case: Ten Jack Queen King Ace
+    if (ranks[Ten - 1] && ranks[Jack - 1] && ranks[Queen - 1] && ranks[King - 1] && ranks[Ace - 1]) {
         return 1;
     }
 
@@ -226,7 +241,7 @@ int isRoyalFlush(Card hand[]) {
         ranks[hand[i].rank - 1]++;
     }
 
-    return ranks[Ten] && ranks[Jack] && ranks[Queen] && ranks[King] && ranks[Ace] && isFlush(hand);
+    return ranks[Ten - 1] && ranks[Jack - 1] && ranks[Queen - 1] && ranks[King - 1] && ranks[Ace - 1] && isFlush(hand);
 }
 
 int evaluateHand(Card hand[]) {
@@ -262,9 +277,11 @@ int evaluateHand(Card hand[]) {
         printf("DVA PARA");
         return 2;
     }
-    else {
-        return 0;
+    else if (isPair(hand)) {
+        printf("JEDAN PAR");
+        return 1;
     }
+    else return 0;
 }
 
 int main() {
@@ -273,28 +290,27 @@ int main() {
     Card deck[NUM_RANKS * NUM_SUITS];
     Card hand[HAND_SIZE];
 
-    
-    
+    initializeDeck(deck);
+    shuffleDeck(deck);
 
-    printf("Dobrodošli na American Poker!\n\n");
+    printf("Dobrodosli na American Poker!\n\n");
 
     while (1) {
         printf("Nova ruka:\n");
-        drawHand(hand);
+        drawCards(deck, hand);
         printHand(hand);
-
-        
-
-    
 
         int score = evaluateHand(hand);
         printf("\nRezultat: %d\n\n", score);
 
-        printf("Želite li igrati ponovo? (1 - da, 0 - ne): ");
-        int playAgain;
-        scanf("%d", &playAgain);
+        printf("Zelite li igrati ponovo? (1 - da, 0 - ne): ");
+        int again;
+        scanf("%d", &again);
+        if (again = 1) {
+            shuffleDeck(deck);
+        }
 
-        if (!playAgain) {
+        if (!1) {
             break;
         }
 

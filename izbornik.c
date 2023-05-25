@@ -1,7 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include "player.h"
-
+#include "funkcije.h"
+#include "poker.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -9,7 +10,7 @@
 int izbornik(PLAYER* player) {
 
 	
-	printf("Odaberite opciju :\n");
+	printf("\nOdaberite opciju :\n");
 	printf("\t\t\tOpcija 1: Provjera statusa.\n");
 	printf("\t\t\tOpcija 2: Promjenite uloge.\n");
 	printf("\t\t\tOpcija 3: START!\n");
@@ -26,12 +27,13 @@ int izbornik(PLAYER* player) {
 	scanf("%d", &uvijet);
 	switch (uvijet) {
 	case 1:
-		provjeraStanja(player); //Provjera stanja igraca
+		provjeraStatusa(player); //Provjera stanja igraca
 		break;
 	case 2:
-		promjenaUloga(player);//promjena uloga
+		promjeniUlog(player);//promjena uloga
 		break;
 	case 3:
+		start(player);
 		upis(player);
 		break;
 	case 4:

@@ -1,11 +1,12 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include "player.h"
-
+#include "poker.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-extern int brojac;
+
 
 //funkcija za provjeru stanja
 void provjeraStatusa(PLAYER* player) {
@@ -17,9 +18,10 @@ void provjeraStatusa(PLAYER* player) {
 
 //funkcija za promjenu uloga
 void promjeniUlog(PLAYER* player) {
+
 	int NoviUlog;
 
-	printf("Unesite novi zeljeni ulog: ");
+	printf("Unesite zeljeni ulog: ");
 	scanf("%d", &NoviUlog);
 
 
@@ -38,7 +40,7 @@ void promjeniUlog(PLAYER* player) {
 //upis rezultata u datoteku
 void upis(PLAYER* player) {
 
-
+	int brojac = 0;
 	FILE* fp = fopen("rezultati.txt", "a");
 	if (fp == NULL) {
 		printf("Nije moguce otvoriti datoteku za pisanje.\n");
@@ -63,12 +65,13 @@ void info() {
 	printf("Straight    : x7\n");
 	printf("3 of kinds  : x5\n");
 	printf("2 pairs     : x3\n");
+	printf("pairs       : x1\n");
 }
 
 
 //funkcija zavrsetka programa
 int izlazIzPrograma() {
-	char c[10] = "";
+	char c[10] = "da";
 	char s[] = "ne";
 
 	printf("Da li ste sigurni kako zelite zavrsiti program?\nda/ne\n");
