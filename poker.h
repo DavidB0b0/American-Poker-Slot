@@ -2,18 +2,18 @@
 #include "player.h"
 #include "hand.h"
 void start(PLAYER* player);
-void initializeDeck(Card deck[]);
-void shuffleDeck(Card deck[]);
+void stvaranjeDeka(Card deck[]);
+void mjesanjeDeka(Card deck[]);
 void printCard(Card card);
 void printHand(Card hand[]);
 void drawCards(Card deck[], Card hand[]);
-int isPair(Card hand[]);
-int isTwoPair(Card hand[]);
-int isThreeOfAKind(Card hand[]);
-int isStraight(Card hand[]);
-int isFlush(Card hand[]);
-int isFullHouse(Card hand[]);
-int isFourOfAKind(Card hand[]);
-int isStraightFlush(Card hand[]);
-int isRoyalFlush(Card hand[]);
-int evaluateHand(Card hand[]);
+int Pairs(Card hand[]);
+int TwoPairs(Card hand[]);
+int ThreeOfAKind(Card hand[]);
+int Straight(Card hand[]);
+int Flush(Card hand[]);
+int FullHouse(Card hand[]);
+int FourOfAKind(Card hand[]);
+int StrFlush(Card hand[]);
+int RoyalFlush(Card hand[]);
+int izracunajHand(Card hand[]);

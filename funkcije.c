@@ -7,13 +7,7 @@
 #include <string.h>
 
 
-
-//funkcija za provjeru stanja
-void provjeraStatusa(PLAYER* player) {
-
-	printf("Stanje: %d kredita\n\n", player->status);
-
-}
+static int brojac = 0;
 
 
 //funkcija za promjenu uloga
@@ -27,7 +21,7 @@ void promjeniUlog(PLAYER* player) {
 
 	//provjera dali ne prekoracava stanje na racunu
 	while (NoviUlog > player->status) {
-		printf("Nemate dovoljno kredita.\n");
+		printf("Nemate dovoljno kredita za igranje.\n");
 		printf("Unesite zeljeni ulog: ");
 		scanf("%d", &NoviUlog);
 	}
@@ -40,7 +34,7 @@ void promjeniUlog(PLAYER* player) {
 //upis rezultata u datoteku
 void upis(PLAYER* player) {
 
-	int brojac = 0;
+	
 	FILE* fp = fopen("rezultati.txt", "a");
 	if (fp == NULL) {
 		printf("Nije moguce otvoriti datoteku za pisanje.\n");
@@ -70,19 +64,25 @@ void info() {
 
 
 //funkcija zavrsetka programa
-int izlazIzPrograma() {
-	char c[10] = "da";
-	char s[] = "ne";
+int izlazIzPrograma(PLAYER* player) {
+	char c[10] = "";
+	char s[] = "da";
 
-	printf("Da li ste sigurni kako zelite zavrsiti program?\nda/ne\n");
+	printf("Jeste li sigurni da zelite zatvoriti porgram ?\nda\nne\n");;
 	scanf("%s", c);
 	if (!strcmp(c, s)) {
 
-		return 1;
+		FILE* fp = fopen("rezultati.txt", "a");
+		if (fp == NULL) {
+			printf("Nije moguce otvoriti datoteku za pisanje.\n");
+			return;
+		}
+		fprintf(fp, "ISPLACENO:%d", player->status);
+		return 0;
 	}
 	else {
-
-		return 0;
+		return 1;
 	}
 
 }
+

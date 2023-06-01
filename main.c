@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-
+static int brojac = 0;
 
 int main(void) {
 
@@ -36,7 +36,7 @@ int main(void) {
 
 	//zapisivanje pocetnog stanja
 
-	int brojac = 0;
+	
 
 	fp = fopen("rezultati.txt", "a");
 	if (fp == NULL) {
@@ -45,7 +45,7 @@ int main(void) {
 	}
 	fprintf(fp, "VRTNJA\tSTANJE\tULOG\tDOBITAK\n");
 	fprintf(fp, "%d\t%d\t%d\t%d\n", brojac, player->status, player->ulog, player->dobitak);
-	fprintf(fp, "\nIsplaceno:%d", player->status);
+	
 	fclose(fp);
 
 
@@ -57,6 +57,6 @@ int main(void) {
 
 	free(player);
 
-	printf("Hvala na igranju\n");
+	printf("Hvala vam na igranju!\n");
 	return 0;
 }
