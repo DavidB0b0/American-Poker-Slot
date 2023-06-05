@@ -13,16 +13,18 @@
 
 static int dobitak = 0;
 
+//brojevi karata
 enum Rank {
 	Ace = 1, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King
 };
 
+//simboli karata
 enum Suit {
 	Clubs, Diamonds, Hearts, Spades
 };
 
 
-
+//inicijalizacija deka
 void stvaranjeDeka(Card deck[]) {
 	int i, j, index = 0;
 	for (i = 0; i < NUM_RANKS; i++) {
@@ -34,6 +36,8 @@ void stvaranjeDeka(Card deck[]) {
 	}
 }
 
+//funkcija za mjesanje deka
+
 void mjesanjeDeka(Card deck[]) {
 	int i, j;
 	Card temp;
@@ -44,6 +48,8 @@ void mjesanjeDeka(Card deck[]) {
 		deck[j] = temp;
 	}
 }
+
+//ispis karte
 
 void printCard(Card card) {
 	switch (card.rank) {
@@ -104,6 +110,8 @@ void printCard(Card card) {
 	}
 }
 
+//ispis ruke
+
 void printHand(Card hand[]) {
 	int i;
 	printf("\n");
@@ -111,8 +119,10 @@ void printHand(Card hand[]) {
 		printCard(hand[i]);
 		printf("\t");
 	}
-	
+
 }
+
+//izvlacenje karte
 
 void drawCards(Card deck[], Card hand[]) {
 	int i;
@@ -121,7 +131,7 @@ void drawCards(Card deck[], Card hand[]) {
 	}
 }
 
-
+//funkcija za provjeru parova
 
 int Pairs(Card hand[]) {
 	int ranks[NUM_RANKS] = { 0 };
@@ -140,6 +150,8 @@ int Pairs(Card hand[]) {
 	return 0;
 }
 
+//funkcija za provjeru 2 para
+
 int TwoPairs(Card hand[]) {
 	int ranks[NUM_RANKS] = { 0 };
 	int i, pairs = 0;
@@ -156,6 +168,8 @@ int TwoPairs(Card hand[]) {
 
 	return pairs == 2;
 }
+
+//funkcija za provjeru trisa
 
 int ThreeOfAKind(Card hand[]) {
 	int ranks[NUM_RANKS] = { 0 };
@@ -174,6 +188,8 @@ int ThreeOfAKind(Card hand[]) {
 	return 0;
 }
 
+//funkcija za provjeru skale
+
 int Straight(Card hand[]) {
 	int ranks[NUM_RANKS] = { 0 };
 	int i;
@@ -188,13 +204,16 @@ int Straight(Card hand[]) {
 		}
 	}
 
-	// Special case: Ten Jack Queen King Ace
+	// Slucaj 10-Jack-Queen-King-Ace
+
 	if (ranks[Ten - 1] && ranks[Jack - 1] && ranks[Queen - 1] && ranks[King - 1] && ranks[Ace - 1]) {
 		return 1;
 	}
 
 	return 0;
 }
+
+//funkcija za provjeru boje
 
 int Flush(Card hand[]) {
 	int suits[NUM_SUITS] = { 0 };
@@ -213,9 +232,13 @@ int Flush(Card hand[]) {
 	return 0;
 }
 
+//funkcija za provjeru full housa
+
 int FullHouse(Card hand[]) {
 	return ThreeOfAKind(hand) && Pairs(hand);
 }
+
+//funkcija za provjeru 4 ista
 
 int FourOfAKind(Card hand[]) {
 	int ranks[NUM_RANKS] = { 0 };
@@ -233,11 +256,12 @@ int FourOfAKind(Card hand[]) {
 
 	return 0;
 }
-
+//funkcija za provjeru skale u boji
 int StrFlush(Card hand[]) {
 	return Straight(hand) && Flush(hand);
 }
 
+//funkcija za provjeru royal flusha
 int RoyalFlush(Card hand[]) {
 	int ranks[NUM_RANKS] = { 0 };
 	int i;
@@ -249,6 +273,7 @@ int RoyalFlush(Card hand[]) {
 	return ranks[Ten - 1] && ranks[Jack - 1] && ranks[Queen - 1] && ranks[King - 1] && ranks[Ace - 1] && Flush(hand);
 }
 
+//izracun dobitka
 int izracunajHand(PLAYER* player, Card hand[]) {
 	if (RoyalFlush(hand)) {
 		printf("ROYAL FLUSH");
@@ -298,9 +323,22 @@ int izracunajHand(PLAYER* player, Card hand[]) {
 	else return 0;
 }
 
+//pretrazivanje najveceg dobitka
+
+void pretragNajDobitka(PLAYER* player) {
+
+	if (player->najDobitak < player->dobitak) {
+
+		player->najDobitak = player->dobitak;
+
+	}
+
+}
+
+
 void start(PLAYER* player) {
 
-
+	int najUlog = 0;
 
 	Card deck[NUM_RANKS * NUM_SUITS];
 	Card hand[HAND_SIZE];
@@ -320,10 +358,13 @@ void start(PLAYER* player) {
 	int score = izracunajHand(player, hand);
 	printf("\nRezultat: %d\n\n", score);
 
+	pretragNajDobitka(player);
+
 	player->status = player->status - player->ulog;
 	player->status = player->status + dobitak;
 	player->dobitak = dobitak;
 	dobitak = 0;
+
 
 
 }

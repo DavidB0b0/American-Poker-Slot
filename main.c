@@ -36,16 +36,16 @@ int main(void) {
 
 	//zapisivanje pocetnog stanja
 
-	
+
 
 	fp = fopen("rezultati.txt", "a");
 	if (fp == NULL) {
 		printf("Nije moguce otvoriti datoteku za pisanje.\n");
 		return;
 	}
-	fprintf(fp, "VRTNJA\tSTANJE\tULOG\tDOBITAK\n");
+	fprintf(fp, "VRTNJA\tSTATUS\tULOG\tDOBITAK\n");
 	fprintf(fp, "%d\t%d\t%d\t%d\n", brojac, player->status, player->ulog, player->dobitak);
-	
+
 	fclose(fp);
 
 

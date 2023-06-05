@@ -15,7 +15,7 @@ int izbornik(PLAYER* player) {
 	printf("\t\t\tOpcija 2: Promjenite uloge.\n");
 	printf("\t\t\tOpcija 3: Informacije mogucih dobitaka. \n");
 	printf("\t\t\tOpcija 4: Cash out!\n");
-	printf("Stanje: %d kredita\n\n", player->status);
+	printf("Status: %d kredita\n\n", player->status);
 	printf("Ulog: %d kredita\n", player->ulog);
 	printf("----------------------------------------------------------------\n");
 
@@ -31,13 +31,13 @@ int izbornik(PLAYER* player) {
 		upis(player);
 		break;
 	case 2:
-		promjeniUlog(player);//promjena uloga
+		promjeniUlog(player);  //promjena uloga
 		break;
 	case 3:
-		info(); //Info o isplati
+		info(); //Informacije o dobitcima
 		break;
 	case 4:
-		uvijet = izlazIzPrograma(player); //Exit
+		uvijet = izlazIzPrograma(player); //Kraj
 		break;
 	default:
 		uvijet = 0;
