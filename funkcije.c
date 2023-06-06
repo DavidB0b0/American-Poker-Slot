@@ -10,7 +10,7 @@
 static int brojac = 0;
 
 
-//funkcija promjene uloga
+//funkcija za promjenu uloga
 void promjeniUlog(PLAYER* player) {
 
 	int NoviUlog;
@@ -19,7 +19,7 @@ void promjeniUlog(PLAYER* player) {
 	scanf("%d", &NoviUlog);
 
 
-	//provjera je li je ulog veci nego status
+	//provjera dali ne prekoracava stanje na racunu
 	while (NoviUlog > player->status) {
 		printf("Nemate dovoljno kredita za igranje.\n");
 		printf("Unesite zeljeni ulog: ");
@@ -34,7 +34,7 @@ void promjeniUlog(PLAYER* player) {
 //upis rezultata u datoteku
 void upis(PLAYER* player) {
 
-
+	
 	FILE* fp = fopen("rezultati.txt", "a");
 	if (fp == NULL) {
 		printf("Nije moguce otvoriti datoteku za pisanje.\n");
@@ -43,7 +43,7 @@ void upis(PLAYER* player) {
 	brojac++;
 	fprintf(fp, "%d\t%d\t%d\t%d\n", brojac, player->status, player->ulog, player->dobitak);
 
-	
+
 	fclose(fp);
 
 }
@@ -63,7 +63,7 @@ void info() {
 }
 
 
-//funkcija zatvaranja programa
+//funkcija zavrsetka programa
 int izlazIzPrograma(PLAYER* player) {
 	char c[10] = "";
 	char s[] = "da";
@@ -86,3 +86,4 @@ int izlazIzPrograma(PLAYER* player) {
 	}
 
 }
+

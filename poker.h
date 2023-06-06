@@ -16,4 +16,5 @@ int FullHouse(Card hand[]);
 int FourOfAKind(Card hand[]);
 int StrFlush(Card hand[]);
 int RoyalFlush(Card hand[]);
-int izracunajHand(Card hand[]);
+int izracunajHand(PLAYER* player, Card hand[]);
+void pretragNajDobitka(PLAYER* player);

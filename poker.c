@@ -358,11 +358,11 @@ void start(PLAYER* player) {
 	int score = izracunajHand(player, hand);
 	printf("\nRezultat: %d\n\n", score);
 
-	pretragNajDobitka(player);
 
 	player->status = player->status - player->ulog;
 	player->status = player->status + dobitak;
 	player->dobitak = dobitak;
+	pretragNajDobitka(player);
 	dobitak = 0;
 
 

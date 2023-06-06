@@ -31,13 +31,13 @@ int izbornik(PLAYER* player) {
 		upis(player);
 		break;
 	case 2:
-		promjeniUlog(player);  //promjena uloga
+		promjeniUlog(player); //promjena uloga
 		break;
 	case 3:
 		info(); //Informacije o dobitcima
 		break;
 	case 4:
-		uvijet = izlazIzPrograma(player); //Kraj
+		uvijet = izlazIzPrograma(player); //Kraj programa
 		break;
 	default:
 		uvijet = 0;
