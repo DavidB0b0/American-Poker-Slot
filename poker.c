@@ -323,17 +323,7 @@ int izracunajHand(PLAYER* player, Card hand[]) {
 	else return 0;
 }
 
-//pretrazivanje najveceg dobitka
 
-void pretragNajDobitka(PLAYER* player) {
-
-	if (player->najDobitak < player->dobitak) {
-
-		player->najDobitak = player->dobitak;
-
-	}
-
-}
 
 
 void start(PLAYER* player) {
@@ -362,9 +352,11 @@ void start(PLAYER* player) {
 	player->status = player->status - player->ulog;
 	player->status = player->status + dobitak;
 	player->dobitak = dobitak;
-	pretragNajDobitka(player);
 	dobitak = 0;
 
+	if (player->dobitak > player->najDobitak) {
+		player->najDobitak = player->dobitak;
+	}
 
 
 }

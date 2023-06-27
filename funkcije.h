@@ -3,7 +3,7 @@
 
 
 void promjeniUlog(PLAYER* player);
-void upis(PLAYER* player);
-void info();
-int izlazIzPrograma(PLAYER* player);
-
+void provjeriStanje(PLAYER* player);
+void upis(PLAYER* player, int brojPlayera,int);
+void pretraziIgraca(PLAYER* player, int brojPlayera);
+void sortiranje(PLAYER* player, int brojPlayera);

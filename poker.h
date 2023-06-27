@@ -17,4 +17,3 @@ int FourOfAKind(Card hand[]);
 int StrFlush(Card hand[]);
 int RoyalFlush(Card hand[]);
 int izracunajHand(PLAYER* player, Card hand[]);
-void pretragNajDobitka(PLAYER* player);

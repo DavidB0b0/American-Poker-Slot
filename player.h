@@ -2,6 +2,7 @@
 
 typedef struct player {
 
+	char ime[20];
 	int status;
 	int ulog;
 	int dobitak;
